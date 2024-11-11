@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+<ModulePrefs title="Google.com" />
+<Content type="html"><![CDATA[
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>google.com</title>
+    <style>
+        /* Full-screen background styling */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: url('https://cdn.jsdelivr.net/gh/v-classroom-googl/oyyo@main/rob.jpg') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+
+        /* Loading screen styling */
+        #loadingScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1d1d1d;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        #loadingBarContainer {
+            width: 60%;
+            height: 12px;
+            background-color: #333333;
+            border-radius: 6px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        #loadingBar {
+            width: 0%;
+            height: 100%;
+            background-color: #ff0000;
+            transition: width 4s ease;
+        }
+
+        /* Logo styling */
+        #logo {
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        #logo img {
+            width: 720px;
+            height: auto;
+        }
+
+        /* Notification bar styling */
+        #notificationBar {
+            background-color: #ffcc00;
+            color: #000000;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            display: none; /* Initially hidden, will show after login */
+            width: 100%; /* Ensures it spans the full width above buttons */
+            box-sizing: border-box; /* Prevents padding from altering width */
+        }
+
+        /* Login box styling with Roblox-inspired colors */
+        #loginBox {
+            background-color: #333333;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: #ffffff;
+            border: 2px solid #ff0000;
+            position: relative;
+            display: none; /* Hidden initially */
+        }
+
+        /* Input field styling */
+        #schoolName {
+            width: 100%;
+            padding: 10px;
+            margin: 15px 0;
+            font-size: 16px;
+            border: 2px solid #ff0000;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        /* Button styling with Roblox-inspired look */
+        .btn {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #ff0000;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #cc0000;
+        }
+
+        .disabled {
+            background-color: gray;
+            cursor: not-allowed;
+        }
+
+        /* Error message styling */
+        .error-message {
+            color: #ff0000;
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: none; /* Initially hidden */
+        }
+
+        /* Button container styling for layout adjustment */
+        #buttons {
+            display: none;
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, 0);
+            width: 320px;
+        }
+
+        /* Styling for the proxy notification */
+.proxyNotification {
+    background-color: #ffcc00;
+    color: #000000;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- Loading screen -->
+    <div id="loadingScreen">
+        <div>Loading...</div>
+        <div id="loadingBarContainer">
+            <div id="loadingBar"></div>
+        </div>
+    </div>
+
+    <!-- Logo positioned slightly below the top center -->
+    <div id="logo">
+        <img src="https://cdn.jsdelivr.net/gh/v-classroom-googl/oyyo@main/robx.png" alt="School Logo">
+    </div>
+
+    <!-- Login box with Roblox-style design -->
+    <div id="loginBox">
+        <h2>Enter Your School Name</h2>
+        <p class="error-message" id="errorMessage">Try a little more magic in your school name!</p>
+        <input type="password" id="schoolName" placeholder="Enter your school name" />
+        <button id="loginBtn" class="btn active" onclick="checkSchoolName()">Submit</button>
+    </div>
+
+    <!-- Game buttons, hidden until login is verified -->
+    <div id="buttons">
+        <div id="notificationBar">
+            Roblox server is temporarily down due to 20k daily user traffic. However, you can still access other Premium Games below.
+        </div>
+        <button class="btn disabled">ROBLOX <span class="status">(Server 0 is FULL!))</span></button>
+        <button class="btn active" onclick="openGame('https://classroom-opensocial.googleusercontent.com/gadgets/ifr?url=https://274079163-174037128449362058.preview.editmysite.com/uploads/b/139890129-899796311729593176/files/rtbl.xml&container=ig')">Game 1 R</button>
+        <button class="btn active" onclick="openGame('https://classroom-opensocial.googleusercontent.com/gadgets/ifr?url=https://275022854-836183720046385513.preview.editmysite.com/uploads/b/139890129-376454683626216828/files/rec.xml&container=ig')">Game 2</button>
+        <button class="btn active" onclick="openGame('https://classroom-opensocial.googleusercontent.com/gadgets/ifr?url=https://276004251-163805371142805694.preview.editmysite.com/uploads/b/139890129-630426005846085079/files/sf.xml&container=ig')">Game 3</button>
+        <button class="btn active" onclick="openGame('https://classroom-opensocial.googleusercontent.com/gadgets/ifr?url=https://471904738-852049328537117493.preview.editmysite.com/uploads/b/139890129-154348492386095606/files/ssee.xml&container=ig')">Game 4 S</button>
+        <button class="btn active" onclick="openGame('https://classroom-opensocial.googleusercontent.com/gadgets/ifr?url=https://cdn.jsdelivr.net/gh/scvholar-classroom/6464dd@main/s.xml&container=ig')">Game 5 new</button>
+        <div class="proxyNotification">Roblox Proxy Server New! 12.11.2024</div>
+        <button class="btn active" onclick="openGame('https://blooketcom.burgerbar.cl/')">Proxy #1</button>
+        <button class="btn active" onclick="openGame('https://milbong.burgerbar.cl/')">Proxy #2</button>
+        <button class="btn active" onclick="openGame('https://adfree-games-at.geometry-games.online/')">Proxy #3</button>
+        <button class="btn active" onclick="openGame('https://unblocked-games-at.geometry-games.online/')">Proxy #4</button>
+        <button class="btn active" onclick="openGame('https://shameless-plug-for.geometry-games.online/')">Proxy #5</button>
+        <button class="btn active" onclick="openGame('hhttps://play-games-at.geometry-games.online/')">Proxy #6</button>
+        <button class="btn active" onclick="openGame('https://rammerhead.geometry-games.online/')">Proxy #7</button>
+        <button class="btn active" onclick="openGame('https://browser.geometry-games.online/')">Proxy #8</button>
+        <button class="btn active" onclick="openGame('https://im-in-the-thick-of-it-everybody-knows.dynorex.com/')">Proxy #9</button>
+        <button class="btn active" onclick="openGame('https://youve-arived-to.walzone.com/')">Proxy #10</button>
+        <button class="btn active" onclick="openGame('https://iwilltakeyourcomputerandyouwill.loseyourip.com/')">Proxy #11</button>
+        <button class="btn active" onclick="openGame('https://burger.burgerman.burgerbar.cl/')">Proxy #12</button>
+        <button class="btn active" onclick="openGame('https://furriesarecute.furryplace.eu/')">Proxy #13</button>
+
+    </div>
+
+<script>
+    // Simulate the loading screen
+    window.onload = function() {
+        const loadingScreen = document.getElementById('loadingScreen');
+        const loadingBar = document.getElementById('loadingBar');
+        const loginBox = document.getElementById('loginBox');
+
+        // Animate the loading bar
+        loadingBar.style.width = '100%';
+
+        // Hide the loading screen after 4 seconds and show the login box
+        setTimeout(() => {
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+                loginBox.style.display = 'block';
+            }, 500); // Fade-out transition duration
+        }, 4000); // Loading screen duration
+    };
+
+    // Function to validate if the school name contains at least 2 words
+    function checkSchoolName() {
+        const schoolName = document.getElementById('schoolName').value.trim();
+        const errorMessage = document.getElementById('errorMessage');
+        const wordCount = schoolName.split(/\s+/).length;
+
+        if (wordCount >= 2) {
+            document.getElementById('loginBox').style.display = 'none';
+            document.getElementById('notificationBar').style.display = 'block'; // Show notification
+            document.getElementById('buttons').style.display = 'block';
+            errorMessage.style.display = 'none';
+        } else {
+            errorMessage.style.display = 'block';
+        }
+    }
+
+    // Function to open games in a full-screen popup with about:blank as the URL, loading the game in an iframe
+    function openGame(gameUrl) {
+        const popup = window.open('about:blank', '_blank', 'width=' + screen.width + ',height=' + screen.height + ',left=0,top=0');
+        popup.document.write(`
+            <html>
+                <head>
+                    <title>google.com</title>
+                    <style>
+                        body, html { margin: 0; padding: 0; width: 100vw; height: 100vh; overflow: hidden; }
+                        iframe { width: 100vw; height: 100vh; border: none; }
+                    </style>
+                </head>
+                <body>
+                    <iframe src="${gameUrl}" allowfullscreen></iframe>
+                </body>
+            </html>
+        `);
+        popup.document.close();
+        popup.moveTo(0, 0);
+        popup.resizeTo(screen.width, screen.height);
+    }
+</script>
+
+</body>
+</html>
+
+
+]]></Content>
+</Module>
